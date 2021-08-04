@@ -1,5 +1,7 @@
 package org.launchcode.java.demos.lsn4classes2;
 
+import java.util.Objects;
+
 public class Student {
 
     private static int nextStudentId = 1;
@@ -7,6 +9,7 @@ public class Student {
     private int studentId;
     private int numberOfCredits = 0;
     private double gpa = 0.0;
+    private int courseCredits;
 
     public Student (String name, int studentId, int numberOfCredits, double gpa) {
         this.name = name;
@@ -30,14 +33,29 @@ public class Student {
 
 
      //TODO: Uncomment and complete the getGradeLevel method here:
-//    public String getGradeLevel() {
+    public String getGradeLevel(int credits) {
 //        // Determine the grade level of the student based on numberOfCredits
-//    }
+        if(credits <= 29) {
+            return "freshman";
+        }else if(credits <= 59) {
+            return "sophomore";
+        }else if (credits <= 89){
+            return "junior";
+        }else{
+            return "senior";
+        }
+    }
 
     // TODO: Complete the addGrade method.
-    public void addGrade(int courseCredits, double grade) {
+
+        public void addGrade(int courseCredits, double grade) {
+            double currentQS = this.gpa * this.numberOfCredits;
+            currentQS += courseCredits * grade;
+            this.numberOfCredits += courseCredits;
+            this.gpa = currentQS/this.numberOfCredits;
+        }
         // Update the appropriate fields: numberOfCredits, gpa
-    }
+//    }
 
     // TODO: Add your custom 'toString' method here. Make sure it returns a well-formatted String rather
     //  than just the class fields.
@@ -85,5 +103,23 @@ public class Student {
         System.out.println(sally);
         sally.addGrade(25, 3.8);
         System.out.println(sally);
+    }
+
+    public String toString() {
+        String studentReport = String.format("%s is a %s with %d credits and a GPA of %.2f", this.name, this.getGradeLevel(this.numberOfCredits), this.getNumberOfCredits(), this.getGpa());
+        return studentReport;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return studentId == student.studentId && name.equals(student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, studentId);
     }
 }

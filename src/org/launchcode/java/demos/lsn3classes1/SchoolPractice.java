@@ -5,6 +5,7 @@ public class SchoolPractice {
     public static void main(String[] args) {
         // Instantiate your Student class for part 2 here!
         Student michelle = new Student("Michelle", 123, 1, 4.0);
+        System.out.println(michelle.getStudentId());
     }
     public class Course {
         private String topic;
@@ -41,8 +42,6 @@ public class SchoolPractice {
         private void setYearsTeaching(int aYearsTeaching) {
             this.yearsTeaching = aYearsTeaching;
         }
-
-
 
     }
 }
