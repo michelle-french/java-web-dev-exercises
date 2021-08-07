@@ -1,5 +1,6 @@
 package org.launchcode.java.demos.lsn4classes2;
 
+import java.sql.SQLOutput;
 import java.util.Objects;
 
 public class Student {
@@ -96,6 +97,7 @@ public class Student {
     }
 
     public static void main(String[] args) {
+        Student michelle = new Student("Michelle", 123, 1, 4.0);
         Student sally = new Student("Sally",1,1,4.0);
         System.out.println("The Student class works! " + sally.getName() + " is a student!");
         System.out.println(sally);
@@ -103,18 +105,23 @@ public class Student {
         System.out.println(sally);
         sally.addGrade(25, 3.8);
         System.out.println(sally);
+        System.out.println(michelle);
     }
 
     public String toString() {
-        String studentReport = String.format("%s is a %s with %d credits and a GPA of %.2f", this.name, this.getGradeLevel(this.numberOfCredits), this.getNumberOfCredits(), this.getGpa());
+        String studentReport = String.format(this.name+ " is a " +this.getGradeLevel(this.numberOfCredits) +" with "+this.getNumberOfCredits()+" credit and a GPA of " +this.getGpa());
         return studentReport;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Student student = (Student) o;
+    public boolean equals(Object toBeCompared) {
+        if (this == toBeCompared) {
+            return true;
+        }
+        if (toBeCompared == null || this.getClass() != toBeCompared.getClass()) {
+            return false;
+        }
+        Student student = (Student) toBeCompared;
         return studentId == student.studentId && name.equals(student.name);
     }
 
