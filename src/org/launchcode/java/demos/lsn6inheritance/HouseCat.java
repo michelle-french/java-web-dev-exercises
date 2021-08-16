@@ -10,6 +10,7 @@ public class HouseCat extends Cat {
     }
 
     public boolean isSatisfied() {
+
         return !isHungry() && !isTired();
     }
 
